@@ -1,11 +1,11 @@
-import { $ } from '@wdio/globals'
-
+import { $,browser} from '@wdio/globals'
+import { delay } from '../utils/auto.helper';
 
 
 class HRMLoginPage {
-    public HRMLoginPage(){
-         
-    }
+    constructor(){ }
+
+    
     public get userName () {
         return $('[name="username"]');
     }
@@ -20,18 +20,18 @@ class HRMLoginPage {
 
     public async openHRMApp(){
         browser.url("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-        await this.delay(8000);
+        await delay(5000);
     }
 
     public async loginToHRM(uname:string,pw:string){
         await this.userName.setValue(uname);
         await this.userPassword.setValue(pw);
-        await this.delay(5000);
+        await delay(2000);
         await this.submitButton.click()
-        await this.delay(5000);
+        await delay(2000);
     }
 
-    delay = ms => new Promise(res => setTimeout(res, ms));
+    //delay = ms => new Promise(res => setTimeout(res, ms));
 
 
 

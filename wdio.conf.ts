@@ -1,4 +1,6 @@
 import type { Options } from '@wdio/types'
+
+
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -15,7 +17,8 @@ export const config: Options.Testrunner = {
     },
     
     specs: [
-        './tests/test*.ts'
+        './tests/specs/*.ts',
+        './tests/specs/**/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -38,7 +41,13 @@ export const config: Options.Testrunner = {
     connectionRetryCount: 3,
     services: ['crossbrowsertesting', 'vscode'],
     framework: 'mocha',
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec',['allure', {
+                                    outputDir: 'allure-results',
+                                    disableWebdriverStepsReporting: true,
+                                    disableWebdriverScreenshotsReporting: false,
+                                  }
+                        ]
+                ],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/

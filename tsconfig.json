@@ -19,8 +19,9 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "esModuleInterop":true,
+        "noUnusedLocals": false,  /*when unused variables are there it won't give compile error*/
+        "noUnusedParameters": false,
         "noFallthroughCasesInSwitch": true
     },
     "include": [
