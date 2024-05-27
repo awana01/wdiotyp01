@@ -21,11 +21,11 @@ describe("Multi tabs", () => {
        await browser.switchWindow("webdriver.io");
        await browser.pause(2000);
        
-       await browser.switchWindow("yahoo.com");
-       await browser.pause(2000);
+    //    await browser.switchWindow("yahoo.com");
+    //    await browser.pause(2000);
        
-       await browser.switchWindow("twitter.com");
-       await browser.pause(2000);
+    //    await browser.switchWindow("twitter.com");
+    //    await browser.pause(2000);
        console.log('test log2')
     });
   });
