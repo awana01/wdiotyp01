@@ -1,6 +1,7 @@
 import {$} from '@wdio/globals'
 import {Faker,fakerEN_US} from '@faker-js/faker';
 import allureReporter from '@wdio/allure-reporter'
+import foxyNewstorePage from './foxy.newstore.page';
 
 
 var Fake = fakerEN_US;
@@ -13,7 +14,7 @@ class FoxySignUpPage{
        return $("div[id='email_found']>span");
     }
 
-
+    
 
 
    public async OpenFoxyApp(){
@@ -21,7 +22,7 @@ class FoxySignUpPage{
    }
 
 
-    public async SignUpNewUser(){
+    public async EnterAboutYouData(){
        
       let fName = Fake.person.firstName();
       let lName = Fake.person.lastName();
@@ -32,17 +33,44 @@ class FoxySignUpPage{
       await $("[id='email']").setValue(newEmail)
       await $("[id='pwd']").click();
       await expect(this.EmailAvailibilityCheck).toHaveText("Available"); 
-      
-      //await $.takeElementScreenshot(("//form[@id='signup']/fieldset")[0],false);
-
-      // allureReporter.addAttachment("Aboutyou",await $$("//form[@id='signup']/fieldset")[0].takeScreenshot(),"image/png");
-
-      
       await $("[id='foxy_desire']").click();
       await $("fieldset:nth-child(2)").click()
+      await $("[id='pwd']").setValue("Test@12341234");
       allureReporter.addAttachment("Screenshot",await browser.takeScreenshot(),"image/png")
-
+      
     }
+
+    public async EnterConsiderYourselfData(){
+      await $("[id='is_programmer']").click();
+      await $("[id='is_developer']").click();
+      await $("[id='is_designer']").click();
+      await $("[id='is_merchant']").click();
+      
+    }
+
+    public async EnterStoreData(){
+      
+      let storeName = Fake.commerce.productMaterial()+'33'
+
+      await $("[id='store_name']").setValue(storeName)
+      await $("[id='store_domain']").setValue(storeName)
+      //terms and condition checkbox
+      await $(".row > .label_checkbox").click();
+      
+    }
+
+    public async ClickCaptcha(){
+      await browser.switchToFrame(0)
+      await $(".recaptcha-checkbox-border").click()
+      await browser.pause(2000)
+      await browser.switchWindow('Admin - FoxyCart')
+    }
+
+    public async SubmitStoreData(){
+      await $("[id='next']").click()
+    }
+
+
 
 }
 

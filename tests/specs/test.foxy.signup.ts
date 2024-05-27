@@ -1,20 +1,15 @@
 import {$,browser} from '@wdio/globals'
 import FoxySignUpPage from '../pages/foxy/foxy.signup.page'
-
 import {delay,generateRandomInteger,generateTimeToken1,generateTimeToken, basePath, joinUserPath} from '../utils/auto.helper'
-import path from 'path'
 import allureReporter from '@wdio/allure-reporter'
-
-
-
-
-
+import foxyNewstorePage from '../pages/foxy/foxy.newstore.page'
 
 describe("Basic Foxy Cart Tests",()=>{
     it("Signup new user",async ()=>{
         await FoxySignUpPage.OpenFoxyApp();
-        await FoxySignUpPage.SignUpNewUser();
+        await FoxySignUpPage.EnterAboutYouData()
         await delay(3000)
+        
     })
 
     it("take element screenshot",async()=>{
@@ -26,6 +21,20 @@ describe("Basic Foxy Cart Tests",()=>{
         allureReporter.addAttachment("element",await ele.saveScreenshot(p),"image/png");
         
     })
+
+    it("enter other store data",async ()=>{
+        await FoxySignUpPage.EnterConsiderYourselfData()
+        await FoxySignUpPage.EnterStoreData()
+        await FoxySignUpPage.ClickCaptcha();
+        await FoxySignUpPage.SubmitStoreData();
+        await delay(5000)
+    })
+
+    it("logout foxy store app",async ()=>{
+        await foxyNewstorePage.LogoutFoxyApp();
+        await delay(5000)
+    })
+
 })
 
 
