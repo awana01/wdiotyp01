@@ -26,5 +26,6 @@ describe("Multi tabs", () => {
        
        await browser.switchWindow("twitter.com");
        await browser.pause(2000);
+       console.log('test log')
     });
   });
