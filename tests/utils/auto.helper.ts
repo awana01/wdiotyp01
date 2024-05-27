@@ -28,4 +28,9 @@ export async function generateTimeToken1(){
     return formattedDate;
 }
 
+export async function joinUserPath(p1:string,p2:string='',p3:string='',p4:string=''){
+      return path.join(basePath,p1,p2,p3,p4);
+}
+
+
 export const basePath = path.resolve('.')
