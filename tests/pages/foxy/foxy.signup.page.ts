@@ -7,6 +7,9 @@ import foxyNewstorePage from './foxy.newstore.page';
 var Fake = fakerEN_US;
 
 class FoxySignUpPage{
+    
+    public NewUserMail:string='';
+    
     constructor(){
     }
 
@@ -27,7 +30,7 @@ class FoxySignUpPage{
       let fName = Fake.person.firstName();
       let lName = Fake.person.lastName();
       let newEmail = `${fName}.${lName}123@yopmail.com`;
-
+      this.NewUserMail = newEmail;
       await $("[id='first_name']").setValue(fName);
       await $("[id='last_name']").setValue(lName)
       await $("[id='email']").setValue(newEmail)
@@ -68,6 +71,7 @@ class FoxySignUpPage{
 
     public async SubmitStoreData(){
       await $("[id='next']").click()
+      return this.NewUserMail;
     }
 
 

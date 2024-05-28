@@ -20,17 +20,28 @@ export const config: Options.Testrunner = {
         './tests/specs/*.ts',
         './tests/specs/**/*.ts'
     ],
+    suites: {
+          foxy_signup: [
+              './tests/foxy_e2e/test.foxy.signup.ts',
+              './tests/specs/login.failure.spec.js'
+            ],
+          suite01:[
+              './tests/suite01/test01.ts',
+              './tests/suite01/test02.ts',
+            ]
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
     ],
  
-    maxInstances: 10,
+    maxInstances: 3,
     capabilities: [{
         browserName: 'chrome'
     }],
 
-    logLevel: 'info',
+    // logLevel: 'info',
+    logLevel: 'error',
     bail: 0,
   
     // baseUrl: 'http://localhost:8080',
@@ -39,9 +50,14 @@ export const config: Options.Testrunner = {
     waitforTimeout: 10000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,
-    services: ['crossbrowsertesting', 'vscode'],
+    services: ['crossbrowsertesting', 'vscode','shared-store'],
     framework: 'mocha',
-    reporters: ['spec',['allure', {
+    reporters: ['spec',['video',{
+                           saveAllVideos: true,       // If true, also saves videos for successful test cases
+                           videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
+                          }],
+                        ['allure', {
+                                    //outputDir: './_results_/allure-raw',
                                     outputDir: 'allure-results',
                                     disableWebdriverStepsReporting: true,
                                     disableWebdriverScreenshotsReporting: false,
